@@ -183,7 +183,7 @@ class _MatchesWidgetState extends State<MatchesWidget> {
                                                                 fontFamily:
                                                                     'Roboto Condensed',
                                                                 color: Color(
-                                                                    0xFFFF0000),
+                                                                    0xFF030303),
                                                               ),
                                                         ),
                                                         AutoSizeText(
