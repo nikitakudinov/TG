@@ -612,7 +612,7 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                                                   BorderRadius.circular(0.0),
                                               child: Image.network(
                                                 _model
-                                                    .selectedTeam1LogotypeVALUE!,
+                                                    .selectedTeam2LogotypeVALUE!,
                                                 width: 30.0,
                                                 height: 30.0,
                                                 fit: BoxFit.cover,
