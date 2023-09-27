@@ -400,6 +400,47 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                                     ),
                                   ],
                                 ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        if (_model.selectedTeam1NameVALUE !=
+                                                null &&
+                                            _model.selectedTeam1NameVALUE != '')
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 5.0, 0.0),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(0.0),
+                                              child: Image.network(
+                                                _model
+                                                    .selectedTeam1LogotypeVALUE!,
+                                                width: 30.0,
+                                                height: 30.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        if (_model.selectedTeam1NameVALUE !=
+                                                null &&
+                                            _model.selectedTeam1NameVALUE != '')
+                                          Text(
+                                            '[${_model.selectedTeam1TagVALUE}] ${_model.selectedTeam1NameVALUE}'
+                                                .maybeHandleOverflow(
+                                              maxChars: 30,
+                                              replacement: '…',
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyLarge,
+                                          ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           ),
@@ -594,18 +635,15 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                                   if (_model.selectedSlotVALUE == '1') {
                                     setState(() {
                                       _model.teamsListVISIBILITY = false;
+                                      _model.selectedTeam1PathVALUE =
+                                          teamListItem.reference;
+                                      _model.selectedTeam1NameVALUE =
+                                          teamListItem.name;
+                                      _model.selectedTeam1TagVALUE =
+                                          teamListItem.tag;
+                                      _model.selectedTeam1LogotypeVALUE =
+                                          teamListItem.logotype;
                                     });
-
-                                    await widget.matchReference!
-                                        .update(createMatchRecordData(
-                                      rival1: createTournamentMemberStruct(
-                                        logotype: teamListItem.logotype,
-                                        name: teamListItem.name,
-                                        tag: teamListItem.tag,
-                                        teamReference: teamListItem.reference,
-                                        clearUnsetFields: false,
-                                      ),
-                                    ));
                                   } else {
                                     setState(() {
                                       _model.teamsListVISIBILITY = false;

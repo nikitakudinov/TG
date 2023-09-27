@@ -23,6 +23,14 @@ class EDITEMatchComponentModel extends FlutterFlowModel {
 
   bool teamsListVISIBILITY = false;
 
+  DocumentReference? selectedTeam1PathVALUE;
+
+  String? selectedTeam1NameVALUE = '';
+
+  String? selectedTeam1TagVALUE = '';
+
+  String? selectedTeam1LogotypeVALUE = 'false';
+
   ///  State fields for stateful widgets in this component.
 
   // Stores action output result for [Firestore Query - Query a collection] action in tournamentButton widget.
