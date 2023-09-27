@@ -117,11 +117,20 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Text(
-                                      baseMatchRecord.gameForTournamentName,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyLarge,
-                                    ),
+                                    if (_model.selectedTournamentName == null ||
+                                        _model.selectedTournamentName == '')
+                                      Text(
+                                        baseMatchRecord.gameForTournamentName,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyLarge,
+                                      ),
+                                    if (_model.selectedTournamentName != null &&
+                                        _model.selectedTournamentName != '')
+                                      Text(
+                                        _model.selectedTournamentName,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyLarge,
+                                      ),
                                   ],
                                 ),
                               ],
@@ -171,15 +180,11 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                                 onTap: () async {
                                   setState(() {
                                     _model.tournamentListVISIBILITY = false;
+                                    _model.selectedTournamentRef =
+                                        tournamentListItem.reference;
+                                    _model.selectedTournamentName =
+                                        tournamentListItem.name;
                                   });
-
-                                  await widget.matchReference!
-                                      .update(createMatchRecordData(
-                                    gameForTournamentRef:
-                                        tournamentListItem.reference,
-                                    gameForTournamentName:
-                                        tournamentListItem.name,
-                                  ));
                                 },
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -226,14 +231,19 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                                 style: FlutterFlowTheme.of(context).labelSmall,
                               ),
                               FlutterFlowDropDown<String>(
-                                controller: _model.dropDownValueController1 ??=
+                                controller: _model.roundValueController ??=
                                     FormFieldController<String>(
-                                  _model.dropDownValue1 ??=
+                                  _model.roundValue ??=
                                       baseMatchRecord.gameForTournamentRound,
                                 ),
                                 options: ['1', '2', '3', '4'],
-                                onChanged: (val) =>
-                                    setState(() => _model.dropDownValue1 = val),
+                                onChanged: (val) async {
+                                  setState(() => _model.roundValue = val);
+                                  setState(() {
+                                    _model.selectedRoundVALUE =
+                                        _model.roundValue;
+                                  });
+                                },
                                 height: 50.0,
                                 textStyle:
                                     FlutterFlowTheme.of(context).labelSmall,
@@ -269,10 +279,9 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                                 style: FlutterFlowTheme.of(context).labelSmall,
                               ),
                               FlutterFlowDropDown<String>(
-                                controller: _model.dropDownValueController2 ??=
+                                controller: _model.pairValueController ??=
                                     FormFieldController<String>(
-                                  _model.dropDownValue2 ??=
-                                      baseMatchRecord.pair,
+                                  _model.pairValue ??= baseMatchRecord.pair,
                                 ),
                                 options: [
                                   '1',
@@ -284,8 +293,12 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                                   '7',
                                   '8'
                                 ],
-                                onChanged: (val) =>
-                                    setState(() => _model.dropDownValue2 = val),
+                                onChanged: (val) async {
+                                  setState(() => _model.pairValue = val);
+                                  setState(() {
+                                    _model.selectedPairVALUE = _model.pairValue;
+                                  });
+                                },
                                 height: 50.0,
                                 textStyle:
                                     FlutterFlowTheme.of(context).labelSmall,
@@ -459,14 +472,14 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                               style: FlutterFlowTheme.of(context).labelSmall,
                             ),
                             FlutterFlowDropDown<String>(
-                              controller: _model.dropDownValueController3 ??=
+                              controller: _model.dropDownValueController1 ??=
                                   FormFieldController<String>(
-                                _model.dropDownValue3 ??=
+                                _model.dropDownValue1 ??=
                                     baseMatchRecord.rival1Wins,
                               ),
                               options: ['1', '2', '3', '4', '5'],
                               onChanged: (val) =>
-                                  setState(() => _model.dropDownValue3 = val),
+                                  setState(() => _model.dropDownValue1 = val),
                               width: 40.0,
                               height: 50.0,
                               textStyle:
@@ -507,61 +520,123 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Expanded(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Text(
-                                    'СОПЕРНИК 2',
-                                    style:
-                                        FlutterFlowTheme.of(context).labelSmall,
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 5.0, 0.0),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(0.0),
-                                          child: Image.network(
-                                            baseMatchRecord.rival2.logotype,
-                                            width: 30.0,
-                                            height: 30.0,
-                                            fit: BoxFit.cover,
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              setState(() {
+                                _model.teamsListVISIBILITY = true;
+                                _model.selectedSlotVALUE = '2';
+                              });
+                              _model.tournamentMembersOnlyList1 =
+                                  await queryTeamRecordOnce(
+                                queryBuilder: (teamRecord) => teamRecord.where(
+                                    'memberOfTournament',
+                                    arrayContains:
+                                        baseMatchRecord.gameForTournamentRef),
+                              );
+
+                              setState(() {});
+                            },
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Text(
+                                      'СОПЕРНИК 2',
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelSmall,
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        if (_model.selectedTeam1NameVALUE ==
+                                                null ||
+                                            _model.selectedTeam1NameVALUE == '')
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 5.0, 0.0),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(0.0),
+                                              child: Image.network(
+                                                baseMatchRecord.rival2.logotype,
+                                                width: 30.0,
+                                                height: 30.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      ),
-                                      Container(
-                                        width: 120.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                        ),
-                                        child: Text(
-                                          '[${baseMatchRecord.rival2.tag}] ${baseMatchRecord.rival2.name}'
-                                              .maybeHandleOverflow(
-                                            maxChars: 30,
-                                            replacement: '…',
+                                        if (_model.selectedTeam1NameVALUE ==
+                                                null ||
+                                            _model.selectedTeam1NameVALUE == '')
+                                          Text(
+                                            '[${baseMatchRecord.rival2.tag}] ${baseMatchRecord.rival2.name}'
+                                                .maybeHandleOverflow(
+                                              maxChars: 30,
+                                              replacement: '…',
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyLarge,
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyLarge,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        if (_model.selectedTeam1NameVALUE !=
+                                                null &&
+                                            _model.selectedTeam1NameVALUE != '')
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 5.0, 0.0),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(0.0),
+                                              child: Image.network(
+                                                _model
+                                                    .selectedTeam1LogotypeVALUE!,
+                                                width: 30.0,
+                                                height: 30.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        if (_model.selectedTeam1NameVALUE !=
+                                                null &&
+                                            _model.selectedTeam1NameVALUE != '')
+                                          Text(
+                                            '[${_model.selectedTeam1TagVALUE}] ${_model.selectedTeam1NameVALUE}'
+                                                .maybeHandleOverflow(
+                                              maxChars: 30,
+                                              replacement: '…',
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyLarge,
+                                          ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         Column(
@@ -575,14 +650,14 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   15.0, 0.0, 0.0, 0.0),
                               child: FlutterFlowDropDown<String>(
-                                controller: _model.dropDownValueController4 ??=
+                                controller: _model.dropDownValueController2 ??=
                                     FormFieldController<String>(
-                                  _model.dropDownValue4 ??=
+                                  _model.dropDownValue2 ??=
                                       baseMatchRecord.rival2Wins,
                                 ),
                                 options: ['1', '2', '3', '4', '5'],
                                 onChanged: (val) =>
-                                    setState(() => _model.dropDownValue4 = val),
+                                    setState(() => _model.dropDownValue2 = val),
                                 width: 40.0,
                                 height: 50.0,
                                 textStyle:
@@ -653,18 +728,15 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                                   } else {
                                     setState(() {
                                       _model.teamsListVISIBILITY = false;
+                                      _model.selectedTeam2PathVALUE =
+                                          teamListItem.reference;
+                                      _model.selectedTeam2NameVALUE =
+                                          teamListItem.name;
+                                      _model.selectedTeam2TagVALUE =
+                                          teamListItem.tag;
+                                      _model.selectedTeam2LogotypeVALUE =
+                                          teamListItem.logotype;
                                     });
-
-                                    await widget.matchReference!
-                                        .update(createMatchRecordData(
-                                      rival2: createTournamentMemberStruct(
-                                        logotype: teamListItem.logotype,
-                                        name: teamListItem.name,
-                                        tag: teamListItem.tag,
-                                        teamReference: teamListItem.reference,
-                                        clearUnsetFields: false,
-                                      ),
-                                    ));
                                   }
                                 },
                                 child: Row(

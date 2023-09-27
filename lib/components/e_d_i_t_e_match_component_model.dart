@@ -31,24 +31,38 @@ class EDITEMatchComponentModel extends FlutterFlowModel {
 
   String? selectedTeam1LogotypeVALUE = 'false';
 
+  String? selectedRoundVALUE = '';
+
+  String? selectedPairVALUE = '';
+
+  DocumentReference? selectedTeam2PathVALUE;
+
+  String? selectedTeam2NameVALUE = '';
+
+  String? selectedTeam2TagVALUE = '';
+
+  String? selectedTeam2LogotypeVALUE = 'false';
+
   ///  State fields for stateful widgets in this component.
 
   // Stores action output result for [Firestore Query - Query a collection] action in tournamentButton widget.
   List<TournamentRecord>? tournamentsList;
-  // State field(s) for DropDown widget.
-  String? dropDownValue1;
-  FormFieldController<String>? dropDownValueController1;
-  // State field(s) for DropDown widget.
-  String? dropDownValue2;
-  FormFieldController<String>? dropDownValueController2;
+  // State field(s) for Round widget.
+  String? roundValue;
+  FormFieldController<String>? roundValueController;
+  // State field(s) for Pair widget.
+  String? pairValue;
+  FormFieldController<String>? pairValueController;
   // Stores action output result for [Firestore Query - Query a collection] action in Column widget.
   List<TeamRecord>? tournamentMembersOnlyList;
   // State field(s) for DropDown widget.
-  String? dropDownValue3;
-  FormFieldController<String>? dropDownValueController3;
+  String? dropDownValue1;
+  FormFieldController<String>? dropDownValueController1;
+  // Stores action output result for [Firestore Query - Query a collection] action in Column widget.
+  List<TeamRecord>? tournamentMembersOnlyList1;
   // State field(s) for DropDown widget.
-  String? dropDownValue4;
-  FormFieldController<String>? dropDownValueController4;
+  String? dropDownValue2;
+  FormFieldController<String>? dropDownValueController2;
 
   /// Initialization and disposal methods.
 
