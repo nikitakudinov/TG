@@ -98,7 +98,8 @@ class _EDITEMatchWidgetState extends State<EDITEMatchWidget> {
                               clearUnsetFields: false,
                             ),
                           ));
-                          context.safePop();
+
+                          context.pushNamed('matches');
                         },
                         text: 'Сохранить',
                         options: FFButtonOptions(
