@@ -1,3 +1,5 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/components/e_d_i_t_e_match_component_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -65,19 +67,65 @@ class _EDITEMatchWidgetState extends State<EDITEMatchWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: wrapWithModel(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                wrapWithModel(
                   model: _model.eDITEMatchComponentModel,
                   updateCallback: () => setState(() {}),
                   child: EDITEMatchComponentWidget(
                     matchReference: widget.matchReference!,
                   ),
                 ),
-              ),
-            ],
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          await widget.matchReference!
+                              .update(createMatchRecordData(
+                            rival1: createTournamentMemberStruct(
+                              logotype: _model.eDITEMatchComponentModel
+                                  .selectedTeam1LogotypeVALUE,
+                              name: _model.eDITEMatchComponentModel
+                                  .selectedTeam1NameVALUE,
+                              tag: _model.eDITEMatchComponentModel
+                                  .selectedTeam1TagVALUE,
+                              teamReference: _model.eDITEMatchComponentModel
+                                  .selectedTeam1PathVALUE,
+                              clearUnsetFields: false,
+                            ),
+                          ));
+                          context.safePop();
+                        },
+                        text: 'Сохранить',
+                        options: FFButtonOptions(
+                          height: 40.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              24.0, 0.0, 24.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).primary,
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Encode Sans Condensed',
+                                    color: Colors.white,
+                                  ),
+                          elevation: 3.0,
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
