@@ -84,6 +84,8 @@ class _EDITEMatchWidgetState extends State<EDITEMatchWidget> {
                     Expanded(
                       child: FFButtonWidget(
                         onPressed: () async {
+                          context.pushNamed('matches');
+
                           await widget.matchReference!
                               .update(createMatchRecordData(
                             rival1: createTournamentMemberStruct(
@@ -98,8 +100,6 @@ class _EDITEMatchWidgetState extends State<EDITEMatchWidget> {
                               clearUnsetFields: false,
                             ),
                           ));
-
-                          context.pushNamed('matches');
                         },
                         text: 'Сохранить',
                         options: FFButtonOptions(
