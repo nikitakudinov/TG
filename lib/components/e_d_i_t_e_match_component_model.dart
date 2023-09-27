@@ -45,6 +45,8 @@ class EDITEMatchComponentModel extends FlutterFlowModel {
 
   bool rival2ButtonVISIBILITY = true;
 
+  bool teamsList1VISIBILITY = false;
+
   ///  State fields for stateful widgets in this component.
 
   // Stores action output result for [Firestore Query - Query a collection] action in tournamentButton widget.

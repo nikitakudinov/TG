@@ -529,8 +529,8 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                               highlightColor: Colors.transparent,
                               onTap: () async {
                                 setState(() {
-                                  _model.teamsListVISIBILITY = true;
                                   _model.selectedSlotVALUE = '2';
+                                  _model.teamsList1VISIBILITY = true;
                                 });
                                 _model.tournamentMembersOnlyList1 =
                                     await queryTeamRecordOnce(
@@ -745,6 +745,95 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                                           teamListItem.tag;
                                       _model.selectedTeam2LogotypeVALUE =
                                           teamListItem.logotype;
+                                    });
+                                  }
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          15.0, 0.0, 0.0, 0.0),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(3.0),
+                                        child: Image.network(
+                                          teamListItem.logotype,
+                                          width: 35.0,
+                                          height: 35.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          10.0, 0.0, 0.0, 0.0),
+                                      child: Text(
+                                        '[${teamListItem.tag}] ${teamListItem.name}',
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelLarge,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                if (_model.teamsList1VISIBILITY)
+                  Container(
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                    child: Align(
+                      alignment: AlignmentDirectional(-1.00, 0.00),
+                      child: Builder(
+                        builder: (context) {
+                          final teamList =
+                              _model.tournamentMembersOnlyList1?.toList() ?? [];
+                          return ListView.separated(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemCount: teamList.length,
+                            separatorBuilder: (_, __) => SizedBox(height: 10.0),
+                            itemBuilder: (context, teamListIndex) {
+                              final teamListItem = teamList[teamListIndex];
+                              return InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  if (_model.selectedSlotVALUE == '1') {
+                                    setState(() {
+                                      _model.teamsListVISIBILITY = false;
+                                      _model.selectedTeam1PathVALUE =
+                                          teamListItem.reference;
+                                      _model.selectedTeam1NameVALUE =
+                                          teamListItem.name;
+                                      _model.selectedTeam1TagVALUE =
+                                          teamListItem.tag;
+                                      _model.selectedTeam1LogotypeVALUE =
+                                          teamListItem.logotype;
+                                      _model.rival2ButtonVISIBILITY = true;
+                                      _model.teamsList1VISIBILITY = false;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      _model.teamsListVISIBILITY = false;
+                                      _model.selectedTeam2PathVALUE =
+                                          teamListItem.reference;
+                                      _model.selectedTeam2NameVALUE =
+                                          teamListItem.name;
+                                      _model.selectedTeam2TagVALUE =
+                                          teamListItem.tag;
+                                      _model.selectedTeam2LogotypeVALUE =
+                                          teamListItem.logotype;
+                                      _model.teamsList1VISIBILITY = false;
                                     });
                                   }
                                 },
