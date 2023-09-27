@@ -1,0 +1,36 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "request",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "type",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "toTournamentOrganizators",
+          "arrayConfig": "CONTAINS"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "match",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "gameForTournamentRef",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "gameForTournamentRound",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "pair",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ]
+}

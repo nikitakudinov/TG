@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "539779170742",
+    "project_id": "pground-34b5a",
+    "storage_bucket": "pground-34b5a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:539779170742:android:e18291e10f25528bfec117",
+        "android_client_info": {
+          "package_name": "com.mycompany.pground"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEg6wgnh9q7jRcaWkrElWNBvaK6N2vkKY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
