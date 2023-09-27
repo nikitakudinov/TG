@@ -78,6 +78,7 @@ class _MatchesWidgetState extends State<MatchesWidget> {
         body: SafeArea(
           top: true,
           child: SingleChildScrollView(
+            primary: false,
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -108,6 +109,7 @@ class _MatchesWidgetState extends State<MatchesWidget> {
                           final matchesList = containerMatchRecordList.toList();
                           return ListView.builder(
                             padding: EdgeInsets.zero,
+                            primary: false,
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
                             itemCount: matchesList.length,
