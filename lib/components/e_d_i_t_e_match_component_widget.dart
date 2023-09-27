@@ -354,6 +354,7 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                               setState(() {
                                 _model.teamsListVISIBILITY = true;
                                 _model.selectedSlotVALUE = '1';
+                                _model.rival2ButtonVISIBILITY = false;
                               });
                               _model.tournamentMembersOnlyList =
                                   await queryTeamRecordOnce(
@@ -560,9 +561,9 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                                     Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
-                                        if (_model.selectedTeam1NameVALUE ==
+                                        if (_model.selectedTeam2NameVALUE ==
                                                 null ||
-                                            _model.selectedTeam1NameVALUE == '')
+                                            _model.selectedTeam2NameVALUE == '')
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
@@ -578,9 +579,9 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                                               ),
                                             ),
                                           ),
-                                        if (_model.selectedTeam1NameVALUE ==
+                                        if (_model.selectedTeam2NameVALUE ==
                                                 null ||
-                                            _model.selectedTeam1NameVALUE == '')
+                                            _model.selectedTeam2NameVALUE == '')
                                           Text(
                                             '[${baseMatchRecord.rival2.tag}] ${baseMatchRecord.rival2.name}'
                                                 .maybeHandleOverflow(
@@ -724,6 +725,7 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                                           teamListItem.tag;
                                       _model.selectedTeam1LogotypeVALUE =
                                           teamListItem.logotype;
+                                      _model.rival2ButtonVISIBILITY = true;
                                     });
                                   } else {
                                     setState(() {
