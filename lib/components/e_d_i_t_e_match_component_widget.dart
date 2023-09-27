@@ -600,9 +600,9 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                                     Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
-                                        if (_model.selectedTeam1NameVALUE !=
+                                        if (_model.selectedTeam2NameVALUE !=
                                                 null &&
-                                            _model.selectedTeam1NameVALUE != '')
+                                            _model.selectedTeam2NameVALUE != '')
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
@@ -619,9 +619,9 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                                               ),
                                             ),
                                           ),
-                                        if (_model.selectedTeam1NameVALUE !=
+                                        if (_model.selectedTeam2NameVALUE !=
                                                 null &&
-                                            _model.selectedTeam1NameVALUE != '')
+                                            _model.selectedTeam2NameVALUE != '')
                                           Text(
                                             '[${_model.selectedTeam2TagVALUE}] ${_model.selectedTeam2NameVALUE}'
                                                 .maybeHandleOverflow(
