@@ -7,6 +7,7 @@ import '/flutter_flow/form_field_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'e_d_i_t_e_match_component_model.dart';
@@ -38,6 +39,22 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => EDITEMatchComponentModel());
+
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.matchData =
+          await MatchRecord.getDocumentOnce(widget.matchReference!);
+      setState(() {
+        _model.selectedTeam1PathVALUE = _model.matchData?.rival1?.teamReference;
+        _model.selectedTeam1NameVALUE = _model.matchData?.rival1?.name;
+        _model.selectedTeam1TagVALUE = _model.matchData?.rival1?.tag;
+        _model.selectedTeam1LogotypeVALUE = _model.matchData?.rival1?.logotype;
+        _model.selectedTeam2PathVALUE = _model.matchData?.rival2?.teamReference;
+        _model.selectedTeam2NameVALUE = _model.matchData?.rival2?.name;
+        _model.selectedTeam2TagVALUE = _model.matchData?.rival2?.tag;
+        _model.selectedTeam2LogotypeVALUE = _model.matchData?.rival2?.logotype;
+      });
+    });
   }
 
   @override
