@@ -178,7 +178,13 @@ class _MatchesWidgetState extends State<MatchesWidget> {
                                                               .rival1.tag,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
-                                                              .titleLarge,
+                                                              .titleLarge
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Roboto Condensed',
+                                                                color: Color(
+                                                                    0xFFFF0000),
+                                                              ),
                                                         ),
                                                         AutoSizeText(
                                                           matchesListItem
