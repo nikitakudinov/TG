@@ -99,6 +99,17 @@ class _EDITEMatchWidgetState extends State<EDITEMatchWidget> {
                                   .selectedTeam1PathVALUE,
                               clearUnsetFields: false,
                             ),
+                            rival2: createTournamentMemberStruct(
+                              logotype: _model.eDITEMatchComponentModel
+                                  .selectedTeam2LogotypeVALUE,
+                              name: _model.eDITEMatchComponentModel
+                                  .selectedTeam2NameVALUE,
+                              tag: _model.eDITEMatchComponentModel
+                                  .selectedTeam2TagVALUE,
+                              teamReference: _model.eDITEMatchComponentModel
+                                  .selectedTeam2PathVALUE,
+                              clearUnsetFields: false,
+                            ),
                           ));
                         },
                         text: 'Сохранить',
