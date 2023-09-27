@@ -372,30 +372,36 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                                     Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 5.0, 0.0),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(0.0),
-                                            child: Image.network(
-                                              baseMatchRecord.rival1.logotype,
-                                              width: 30.0,
-                                              height: 30.0,
-                                              fit: BoxFit.cover,
+                                        if (_model.selectedTeam1NameVALUE ==
+                                                null ||
+                                            _model.selectedTeam1NameVALUE == '')
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 5.0, 0.0),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(0.0),
+                                              child: Image.network(
+                                                baseMatchRecord.rival1.logotype,
+                                                width: 30.0,
+                                                height: 30.0,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        Text(
-                                          '[${baseMatchRecord.rival1.tag}] ${baseMatchRecord.rival1.name}'
-                                              .maybeHandleOverflow(
-                                            maxChars: 30,
-                                            replacement: '…',
+                                        if (_model.selectedTeam1NameVALUE ==
+                                                null ||
+                                            _model.selectedTeam1NameVALUE == '')
+                                          Text(
+                                            '[${baseMatchRecord.rival1.tag}] ${baseMatchRecord.rival1.name}'
+                                                .maybeHandleOverflow(
+                                              maxChars: 30,
+                                              replacement: '…',
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyLarge,
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyLarge,
-                                        ),
                                       ],
                                     ),
                                   ],
