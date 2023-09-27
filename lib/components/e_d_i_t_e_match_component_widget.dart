@@ -509,186 +509,193 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                     ),
                   ),
                 ),
-                Container(
-                  height: 80.0,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                  ),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(15.0, 5.0, 15.0, 5.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              setState(() {
-                                _model.teamsListVISIBILITY = true;
-                                _model.selectedSlotVALUE = '2';
-                              });
-                              _model.tournamentMembersOnlyList1 =
-                                  await queryTeamRecordOnce(
-                                queryBuilder: (teamRecord) => teamRecord.where(
-                                    'memberOfTournament',
-                                    arrayContains:
-                                        baseMatchRecord.gameForTournamentRef),
-                              );
+                if (_model.rival2ButtonVISIBILITY)
+                  Container(
+                    height: 80.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(15.0, 5.0, 15.0, 5.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Expanded(
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                setState(() {
+                                  _model.teamsListVISIBILITY = true;
+                                  _model.selectedSlotVALUE = '2';
+                                });
+                                _model.tournamentMembersOnlyList1 =
+                                    await queryTeamRecordOnce(
+                                  queryBuilder: (teamRecord) =>
+                                      teamRecord.where('memberOfTournament',
+                                          arrayContains: baseMatchRecord
+                                              .gameForTournamentRef),
+                                );
 
-                              setState(() {});
-                            },
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Text(
-                                      'СОПЕРНИК 2',
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelSmall,
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        if (_model.selectedTeam2NameVALUE ==
-                                                null ||
-                                            _model.selectedTeam2NameVALUE == '')
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 5.0, 0.0),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(0.0),
-                                              child: Image.network(
-                                                baseMatchRecord.rival2.logotype,
-                                                width: 30.0,
-                                                height: 30.0,
-                                                fit: BoxFit.cover,
+                                setState(() {});
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        'СОПЕРНИК 2',
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelSmall,
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          if (_model.selectedTeam2NameVALUE ==
+                                                  null ||
+                                              _model.selectedTeam2NameVALUE ==
+                                                  '')
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 5.0, 0.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(0.0),
+                                                child: Image.network(
+                                                  baseMatchRecord
+                                                      .rival2.logotype,
+                                                  width: 30.0,
+                                                  height: 30.0,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        if (_model.selectedTeam2NameVALUE ==
-                                                null ||
-                                            _model.selectedTeam2NameVALUE == '')
-                                          Text(
-                                            '[${baseMatchRecord.rival2.tag}] ${baseMatchRecord.rival2.name}'
-                                                .maybeHandleOverflow(
-                                              maxChars: 30,
-                                              replacement: '…',
+                                          if (_model.selectedTeam2NameVALUE ==
+                                                  null ||
+                                              _model.selectedTeam2NameVALUE ==
+                                                  '')
+                                            Text(
+                                              '[${baseMatchRecord.rival2.tag}] ${baseMatchRecord.rival2.name}'
+                                                  .maybeHandleOverflow(
+                                                maxChars: 30,
+                                                replacement: '…',
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyLarge,
                                             ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyLarge,
-                                          ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        if (_model.selectedTeam2NameVALUE !=
-                                                null &&
-                                            _model.selectedTeam2NameVALUE != '')
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 5.0, 0.0),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(0.0),
-                                              child: Image.network(
-                                                _model
-                                                    .selectedTeam2LogotypeVALUE!,
-                                                width: 30.0,
-                                                height: 30.0,
-                                                fit: BoxFit.cover,
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          if (_model.selectedTeam2NameVALUE !=
+                                                  null &&
+                                              _model.selectedTeam2NameVALUE !=
+                                                  '')
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 5.0, 0.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(0.0),
+                                                child: Image.network(
+                                                  _model
+                                                      .selectedTeam2LogotypeVALUE!,
+                                                  width: 30.0,
+                                                  height: 30.0,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        if (_model.selectedTeam2NameVALUE !=
-                                                null &&
-                                            _model.selectedTeam2NameVALUE != '')
-                                          Text(
-                                            '[${_model.selectedTeam2TagVALUE}] ${_model.selectedTeam2NameVALUE}'
-                                                .maybeHandleOverflow(
-                                              maxChars: 30,
-                                              replacement: '…',
+                                          if (_model.selectedTeam2NameVALUE !=
+                                                  null &&
+                                              _model.selectedTeam2NameVALUE !=
+                                                  '')
+                                            Text(
+                                              '[${_model.selectedTeam2TagVALUE}] ${_model.selectedTeam2NameVALUE}'
+                                                  .maybeHandleOverflow(
+                                                maxChars: 30,
+                                                replacement: '…',
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyLarge,
                                             ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyLarge,
-                                          ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Text(
-                              'ПОБЫДЫ',
-                              style: FlutterFlowTheme.of(context).labelSmall,
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  15.0, 0.0, 0.0, 0.0),
-                              child: FlutterFlowDropDown<String>(
-                                controller: _model.dropDownValueController2 ??=
-                                    FormFieldController<String>(
-                                  _model.dropDownValue2 ??=
-                                      baseMatchRecord.rival2Wins,
-                                ),
-                                options: ['1', '2', '3', '4', '5'],
-                                onChanged: (val) =>
-                                    setState(() => _model.dropDownValue2 = val),
-                                width: 40.0,
-                                height: 50.0,
-                                textStyle:
-                                    FlutterFlowTheme.of(context).labelSmall,
-                                hintText: baseMatchRecord.rival2Wins,
-                                icon: Icon(
-                                  Icons.keyboard_arrow_down_rounded,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 24.0,
-                                ),
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                elevation: 2.0,
-                                borderColor: Colors.transparent,
-                                borderWidth: 0.0,
-                                borderRadius: 0.0,
-                                margin: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                hidesUnderline: true,
-                                isSearchable: false,
-                                isMultiSelect: false,
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ],
+                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                'ПОБЫДЫ',
+                                style: FlutterFlowTheme.of(context).labelSmall,
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    15.0, 0.0, 0.0, 0.0),
+                                child: FlutterFlowDropDown<String>(
+                                  controller:
+                                      _model.dropDownValueController2 ??=
+                                          FormFieldController<String>(
+                                    _model.dropDownValue2 ??=
+                                        baseMatchRecord.rival2Wins,
+                                  ),
+                                  options: ['1', '2', '3', '4', '5'],
+                                  onChanged: (val) => setState(
+                                      () => _model.dropDownValue2 = val),
+                                  width: 40.0,
+                                  height: 50.0,
+                                  textStyle:
+                                      FlutterFlowTheme.of(context).labelSmall,
+                                  hintText: baseMatchRecord.rival2Wins,
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_down_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24.0,
+                                  ),
+                                  fillColor: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  elevation: 2.0,
+                                  borderColor: Colors.transparent,
+                                  borderWidth: 0.0,
+                                  borderRadius: 0.0,
+                                  margin: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  hidesUnderline: true,
+                                  isSearchable: false,
+                                  isMultiSelect: false,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
                 if (_model.teamsListVISIBILITY)
                   Container(
                     decoration: BoxDecoration(
