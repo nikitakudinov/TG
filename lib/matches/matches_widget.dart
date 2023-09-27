@@ -83,7 +83,11 @@ class _MatchesWidgetState extends State<MatchesWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 StreamBuilder<List<MatchRecord>>(
-                  stream: queryMatchRecord(),
+                  stream: queryMatchRecord(
+                    queryBuilder: (matchRecord) => matchRecord
+                        .orderBy('gameForTournamentRound')
+                        .orderBy('pair'),
+                  ),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {

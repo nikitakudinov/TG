@@ -19,6 +19,20 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
+          "fieldPath": "gameForTournamentRound",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "pair",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "match",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
           "fieldPath": "gameForTournamentRef",
           "order": "ASCENDING"
         },
