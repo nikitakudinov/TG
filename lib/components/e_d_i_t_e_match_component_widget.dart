@@ -623,7 +623,7 @@ class _EDITEMatchComponentWidgetState extends State<EDITEMatchComponentWidget> {
                                                 null &&
                                             _model.selectedTeam1NameVALUE != '')
                                           Text(
-                                            '[${_model.selectedTeam1TagVALUE}] ${_model.selectedTeam1NameVALUE}'
+                                            '[${_model.selectedTeam2TagVALUE}] ${_model.selectedTeam2NameVALUE}'
                                                 .maybeHandleOverflow(
                                               maxChars: 30,
                                               replacement: '…',
