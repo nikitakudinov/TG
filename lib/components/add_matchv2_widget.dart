@@ -823,8 +823,8 @@ class _AddMatchv2WidgetState extends State<AddMatchv2Widget> {
                                   _model.selectedWins2VALUE!
                               ? _model.matchData?.rival1?.teamReference
                               : _model.matchData?.rival2?.teamReference,
-                          rival1Wins: _model.wins1Value,
-                          rival2Wins: _model.wins2Value,
+                          rival1Wins: _model.selectedWins1VALUE?.toString(),
+                          rival2Wins: _model.selectedWins2VALUE?.toString(),
                         ));
                         _model.tournamentData =
                             await TournamentRecord.getDocumentOnce(

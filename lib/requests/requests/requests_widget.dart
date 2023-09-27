@@ -484,10 +484,9 @@ class _RequestsWidgetState extends State<RequestsWidget> {
               ),
               StreamBuilder<List<RequestRecord>>(
                 stream: queryRequestRecord(
-                  queryBuilder: (requestRecord) => requestRecord
-                      .where('toTournamentOrganizators',
-                          arrayContains: currentUserReference)
-                      .where('type', isEqualTo: 'Матч репорт'),
+                  queryBuilder: (requestRecord) => requestRecord.where(
+                      'toTournamentOrganizators',
+                      arrayContains: currentUserReference),
                   singleRecord: true,
                 ),
                 builder: (context, snapshot) {
